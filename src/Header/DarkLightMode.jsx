@@ -1,7 +1,13 @@
 import { useState } from "react";
 
 export default function DarkLightMode() {
-	let [mode, setMode] = useState(localStorage.theme);
+	let [mode, setMode] = useState(() => {
+		if (localStorage.getItem("theme") == undefined) {
+			localStorage.setItem("theme", "dark");
+			return "dark";
+		}
+		return localStorage.getItem("theme");
+	});
 	window.addEventListener("load", () => {
 		if (localStorage.theme == "light") {
 			document.documentElement.classList.remove("dark");
