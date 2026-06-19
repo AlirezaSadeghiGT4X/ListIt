@@ -1,13 +1,13 @@
 export default function AddTodo() {
 	let todos = localStorage.getItem("todos");
 	let buttonClass =
-		"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary w-16 h-16 rounded-full right-8 bottom-8 text-5xl bg-primary text-white";
+		"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary text-white";
 	if (todos == null || todos == undefined || todos == "") {
 		buttonClass =
-			"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary w-16 h-16 rounded-full right-8 bottom-8 text-5xl bg-primary animate-bounce text-white";
+			"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary animate-bounce text-white";
 	} else {
 		buttonClass;
-		("fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary w-16 h-16 rounded-full right-8 bottom-8 text-5xl bg-primary text-white");
+		("fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary text-white");
 	}
 	return (
 		<div className="absolute w-full bottom-0">
