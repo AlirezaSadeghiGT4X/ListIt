@@ -1,17 +1,21 @@
-import { useEffect, useReducer, useState } from "react";
+import { useReducer, useState } from "react";
 
 export default function Categories() {
+	const savedCategories = localStorage.getItem("categories");
+	const selectedCategory = localStorage.getItem("selectedCategory");
+	const [, forceUpdate] = useReducer((x) => x + 1, 0);
+	if (!savedCategories) {
+		localStorage.setItem("categories", "All");
+	}
+	if (!selectedCategory) {
+		localStorage.setItem("selectedCategory", "All");
+		forceUpdate();
+	}
 	const [categories] = useState(() => {
 		const c = localStorage.getItem("categories");
 		return c ? c.split(",") : ["All"];
 	});
-	useEffect(() => {
-		if (!localStorage.getItem("categories")) {
-			localStorage.setItem("categories", "All");
-		}
-	}, []);
-	const [, forceUpdate] = useReducer((x) => x + 1, 0);
-	function ClickHandler(event) {
+	function ClickHandler() {
 		localStorage.setItem("selectedCategory", event.target.outerText);
 		forceUpdate();
 	}
