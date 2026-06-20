@@ -1,5 +1,6 @@
 import AddTodo from "./AddTodo";
 import Empty from "./Empty";
+import TodoList from "./TodoList";
 
 export default function Todos() {
 	let todos = localStorage.getItem("todos");
@@ -10,7 +11,9 @@ export default function Todos() {
 					<Empty />
 				</div>
 			) : (
-				<></>
+				<div className="flex items-center justify-center flex-1 h-full">
+					<TodoList />
+				</div>
 			)}
 			<AddTodo />
 		</div>

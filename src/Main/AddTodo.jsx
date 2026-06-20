@@ -1,4 +1,8 @@
+import { useState } from "react";
+import AddTodoModal from "./AddTodoModal";
+
 export default function AddTodo() {
+	//Handle button animation
 	let todos = localStorage.getItem("todos");
 	let buttonClass =
 		"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary text-white";
@@ -9,9 +13,30 @@ export default function AddTodo() {
 		buttonClass;
 		("fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary text-white");
 	}
+	//Handle button click
+	let [modalStatus, setModalStatus] = useState(
+		"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+	);
+	let [status, setStatus] = useState(false);
+	function ClickHandler() {
+		if (status == false) {
+			setModalStatus(
+				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all ",
+			);
+			setModalStatus(
+				"w-dvw h-dvh flex mr-16 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all",
+			);
+			setStatus(true);
+		} else if (status == true) {
+			setModalStatus(
+				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+			);
+			setStatus(false);
+		}
+	}
 	return (
-		<div className="absolute w-full bottom-0">
-			<button className={buttonClass}>
+		<div className="fixed right-0 w-full bottom-0">
+			<button className={buttonClass} onClick={ClickHandler}>
 				<svg
 					width="45px"
 					height="45px"
@@ -37,6 +62,9 @@ export default function AddTodo() {
 					</g>
 				</svg>
 			</button>
+			<div className={modalStatus}>
+				<AddTodoModal CloseModal={ClickHandler} />
+			</div>
 		</div>
 	);
 }
