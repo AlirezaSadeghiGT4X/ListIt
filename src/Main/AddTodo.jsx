@@ -1,9 +1,15 @@
 import { useState } from "react";
 import AddTodoModal from "./AddTodoModal";
 
-export default function AddTodo() {
+export default function AddTodo({
+	data,
+	setValue,
+	removeValue,
+	selectedCategory,
+	setSelectedCategory,
+}) {
 	//Handle button animation
-	let todos = localStorage.getItem("todos");
+	let todos = data;
 	let buttonClass =
 		"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary text-white";
 	if (todos == null || todos == undefined || todos == "") {
@@ -63,7 +69,14 @@ export default function AddTodo() {
 				</svg>
 			</button>
 			<div className={modalStatus}>
-				<AddTodoModal CloseModal={ClickHandler} />
+				<AddTodoModal
+					CloseModal={ClickHandler}
+					data={data}
+					setValue={setValue}
+					removeValue={removeValue}
+					selectedCategory={selectedCategory}
+					setSelectedCategory={setSelectedCategory}
+				/>
 			</div>
 		</div>
 	);

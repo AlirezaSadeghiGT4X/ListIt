@@ -1,31 +1,27 @@
 import { useReducer, useState } from "react";
+import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 
 export default function AddTodoModal({ CloseModal }) {
 	const [, forceUpdate] = useReducer((x) => x + 1, 0);
-	let categories = localStorage.getItem("categories").split(",");
+	let [categories, setCategories] = useLocalStorage("categories", ["All"]);
 	let [selectedCategory, setSelectedCategory] = useState("NoCategory");
 	let [inputValue, setInputValue] = useState("");
 	let [textareaValue, setTextareaValue] = useState("");
 	function AddCategoryClickHandler() {
 		let newCategory = prompt("Enter your new category name : ");
 		if (newCategory) {
-			let newCategories = "";
-			for (let i = 0; i < categories.length; i++) {
-				newCategories = newCategories + categories[i] + ",";
-			}
-			newCategories = newCategories + newCategory;
-			localStorage.setItem("categories", newCategories);
-			Categories();
+			let newCategories = [...categories, newCategory.trim()];
+			setCategories(newCategories);
 			forceUpdate();
+			Categories();
 			setSelectedCategory(newCategory);
 		}
 	}
 	//Render Categories in select
 	function Categories() {
-		let cs = localStorage.getItem("categories").split(",");
-		return cs.map((category, index) => {
-			if (category != "All") {
+		return categories.map((category, index) => {
+			if (category != "All" && category != "") {
 				return (
 					<option value={category} key={index}>
 						{category}
@@ -47,40 +43,46 @@ export default function AddTodoModal({ CloseModal }) {
 	}
 	function ResetModal() {
 		setInputValue("");
+		setRequireField("text-xs text-red-600 ml-2 hidden");
 		setSelectedCategory("NoCategory");
 		setTextareaValue("");
 		CloseModal();
 	}
 	//Add new Todo
+	let [requireField, setRequireField] = useState(
+		"text-xs text-red-600 ml-2 hidden",
+	);
+	let [todos, setTodos] = useLocalStorage("todos", []);
 	function AddNewTodo() {
-		ResetModal();
-		let todos = JSON.parse(localStorage.getItem("todos")) || [];
-		let time = new Date();
-		const newTodo = {
-			id: uuidv4(),
-			title: inputValue,
-			category: selectedCategory,
-			description: textareaValue,
-			time:
-				time.getFullYear() +
-				"/" +
-				(time.getMonth() + 1) +
-				"/" +
-				time.getDay() +
-				" - " +
-				time.getHours() +
-				":" +
-				time.getMinutes() +
-				":" +
-				time.getSeconds(),
-		};
-		console.log(newTodo);
-		if (todos) {
-			todos.push(newTodo);
+		if (inputValue != "") {
+			ResetModal();
+			let time = new Date();
+			const newTodo = {
+				id: uuidv4(),
+				title: inputValue,
+				category: selectedCategory,
+				description: textareaValue,
+				time:
+					time.getFullYear() +
+					"/" +
+					(time.getMonth() + 1) +
+					"/" +
+					time.getDate() +
+					" - " +
+					time.getHours() +
+					":" +
+					time.getMinutes() +
+					":" +
+					time.getSeconds(),
+			};
+			if (todos) {
+				setTodos([...todos, newTodo]);
+			} else {
+				setTodos([newTodo]);
+			}
 		} else {
-			todos = { newTodo };
+			setRequireField("text-xs text-red-600 ml-2 block");
 		}
-		localStorage.setItem("todos", JSON.stringify(todos));
 	}
 	return (
 		<div className="relative">
@@ -104,7 +106,9 @@ export default function AddTodoModal({ CloseModal }) {
 								className="bg-white text-black w-full rounded-xl px-2 py-0.5 border border-slate-700"
 								value={inputValue}
 								onChange={InputChangeHandler}
+								required
 							/>
+							<p className={requireField}>This field is required.</p>
 						</div>
 						<div className="flex flex-col text-black dark:text-white">
 							<p>Category</p>
