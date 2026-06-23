@@ -52,9 +52,18 @@ export default function AddTodoModal({ CloseModal }) {
 	let [requireField, setRequireField] = useState(
 		"text-xs text-red-600 ml-2 hidden",
 	);
+	let [errorText, setErrorText] = useState("");
 	let [todos, setTodos] = useLocalStorage("todos", []);
 	function AddNewTodo() {
-		if (inputValue != "") {
+		//Check the todo is unic
+		let isUnic = true;
+		todos.map((todo) => {
+			if (inputValue == todo.title) {
+				isUnic = false;
+			}
+		});
+		//Add todo
+		if (inputValue != "" && inputValue != " " && isUnic) {
 			ResetModal();
 			let time = new Date();
 			const newTodo = {
@@ -74,6 +83,7 @@ export default function AddTodoModal({ CloseModal }) {
 					time.getMinutes() +
 					":" +
 					time.getSeconds(),
+				checked: false,
 			};
 			if (todos) {
 				setTodos([...todos, newTodo]);
@@ -81,19 +91,28 @@ export default function AddTodoModal({ CloseModal }) {
 				setTodos([newTodo]);
 			}
 		} else {
+			if ((inputValue == "" || inputValue == " ") && !isUnic) {
+				setErrorText(
+					"This field is required and you have already the same todo.",
+				);
+			} else if (inputValue == "" || inputValue == " ") {
+				setErrorText("This field is required.");
+			} else if (!isUnic) {
+				setErrorText("You have already the same todo.");
+			}
 			setRequireField("text-xs text-red-600 ml-2 block");
 		}
 	}
 	return (
 		<div className="relative">
-			<div className="w-80 md:w-120 p-4 h-96 bg-white dark:bg-neutral-950 rounded-lg flex flex-col gap-8 border border-dark dark:border-none">
+			<div className="w-75 sm:w-85 md:w-120 p-4 h-96 bg-white dark:bg-neutral-950 rounded-lg flex flex-col gap-8 border border-dark dark:border-none shadow-lg shadow-gray-500 dark:shadow-sm dark:shadow-white">
 				<div
-					className="absolute right-4 top-2 text-rose-700 text-4xl cursor-pointer"
+					className="absolute right-4 top-2 text-rose-800 text-4xl cursor-pointer"
 					onClick={ResetModal}
 				>
 					×
 				</div>
-				<p className="w-full text-center text-xl xl:text-2xl text-black dark:text-white">
+				<p className="w-full text-center text-xl xl:text-2xl text-black dark:text-white font-light">
 					ADD NEW TODO
 				</p>
 				<form className="space-y-3">
@@ -108,7 +127,7 @@ export default function AddTodoModal({ CloseModal }) {
 								onChange={InputChangeHandler}
 								required
 							/>
-							<p className={requireField}>This field is required.</p>
+							<p className={requireField}>{errorText}</p>
 						</div>
 						<div className="flex flex-col text-black dark:text-white">
 							<p>Category</p>
@@ -125,7 +144,7 @@ export default function AddTodoModal({ CloseModal }) {
 									onClick={AddCategoryClickHandler}
 									className="text-dark"
 								>
-									+New category
+									<p>+New category</p>
 								</option>
 							</select>
 						</div>

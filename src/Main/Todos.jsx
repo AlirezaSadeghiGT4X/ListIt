@@ -13,7 +13,7 @@ export default function Todos({ selectedCategory, setSelectedCategory }) {
 					<Empty />
 				</div>
 			) : (
-				<div className="flex items-center justify-center flex-1 h-full">
+				<div className="flex justify-center flex-1 h-full">
 					<TodoList
 						data={data}
 						setValue={setValue}

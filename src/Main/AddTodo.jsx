@@ -11,13 +11,13 @@ export default function AddTodo({
 	//Handle button animation
 	let todos = data;
 	let buttonClass =
-		"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary text-white";
+		"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary text-white transition-all duration-300";
 	if (todos == null || todos == undefined || todos == "") {
 		buttonClass =
-			"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary animate-bounce text-white";
+			"fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary animate-bounce text-white transition-all duration-300";
 	} else {
 		buttonClass;
-		("fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary text-white");
+		("fixed flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary sm:w-16 sm:h-16 w-14 h-14 rounded-full xl:right-8 xl:bottom-8 lg:right-5 lg:bottom-5 md:right-5 md:bottom-5 right-3 bottom-3 text-5xl bg-primary text-white transition-all duration-300");
 	}
 	//Handle button click
 	let [modalStatus, setModalStatus] = useState(
@@ -27,21 +27,44 @@ export default function AddTodo({
 	function ClickHandler() {
 		if (status == false) {
 			setModalStatus(
-				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all ",
+				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
 			);
-			setModalStatus(
-				"w-dvw h-dvh flex mr-16 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all",
-			);
+			setTimeout(() => {
+				setModalStatus(
+					"w-dvw h-dvh flex mr-16 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all",
+				);
+			}, 1);
 			setStatus(true);
 		} else if (status == true) {
 			setModalStatus(
-				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
 			);
+			setTimeout(() => {
+				setModalStatus(
+					"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+				);
+			}, 1);
+			setStatus(false);
+		}
+	}
+	function HandleCloseModal(event) {
+		if (
+			event.target.className ===
+			"w-dvw h-dvh flex mr-16 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all"
+		) {
+			setModalStatus(
+				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
+			);
+			setTimeout(() => {
+				setModalStatus(
+					"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+				);
+			}, 50);
 			setStatus(false);
 		}
 	}
 	return (
-		<div className="fixed right-0 w-full bottom-0">
+		<div className="fixed right-0 w-full bottom-0" onClick={HandleCloseModal}>
 			<button className={buttonClass} onClick={ClickHandler}>
 				<svg
 					width="45px"

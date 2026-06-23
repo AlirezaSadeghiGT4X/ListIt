@@ -14,7 +14,7 @@ export default function Main() {
 				selectedCategory={selectedCategory}
 				setSelectedCategory={setSelectedCategory}
 			/>
-			<div className="w-full flex items-center justify-center flex-1">
+			<div className="w-full flex justify-center flex-1">
 				<Todos
 					selectedCategory={selectedCategory}
 					setSelectedCategory={setSelectedCategory}

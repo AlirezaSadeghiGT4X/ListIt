@@ -7,3 +7,19 @@
     --color-middle: #33AE65;
     --color-light: #54BA7B;
 }
+
+.hide-scrollbar {
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+    display: none;
+    /* Chrome */
+}
+
+.Nunito {
+    font-family: 'Nunito', sans-serif;
+}

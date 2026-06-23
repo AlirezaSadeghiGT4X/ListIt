@@ -26,14 +26,46 @@ export default function TodoList({ data, setValue, removeValue }) {
 			setNewTodos(filtered);
 		}
 	}, [data, selectedCategory]);
+	//Check, change, set todo status
+	function CheckboxClickHandler(event) {
+		const updatedData = data.map((aData) => {
+			if (event.target.id === aData.title) {
+				return { ...aData, checked: !aData.checked };
+			}
+			return aData;
+		});
+		setValue(updatedData);
+		setTodoStatus();
+	}
+	//Set trough-line or no for todos
+	function setTodoStatus(todo) {
+		if (!todo.checked) {
+			return "dark:hover:bg-neutral-700 hover:bg-neutral-200 transition-colors duration-200";
+		}
+		return "dark:hover:bg-neutral-700 hover:bg-neutral-200 transition-colors duration-200 line-through decoration-2 decoration-amber-300";
+	}
 	const columns = [
 		{
 			accessorKey: "title",
 			header: "Title",
 			cell: (info) => (
-				<span className="font-medium text-black dark:text-white">
-					{info.getValue()}
-				</span>
+				<div className="flex gap-2 items-center">
+					<span>
+						<input
+							type="checkbox"
+							name="Checked"
+							onChange={CheckboxClickHandler}
+							className="accent-light cursor-pointer"
+							id={info.getValue()}
+							checked={
+								data.find((d) => d.title === info.getValue())?.checked ?? false
+							}
+						/>
+					</span>
+					<span className="font-medium text-black dark:text-white">
+						{info.getValue()}
+					</span>
+				</div>
 			),
 		},
 		{
@@ -72,48 +104,52 @@ export default function TodoList({ data, setValue, removeValue }) {
 	});
 
 	return (
-		<div className="max-w-6xl mx-auto">
-			<div className="overflow-hidden bg-white dark:bg-neutral-800 rounded-xl border border-dark">
-				<div className="overflow-x-auto">
-					<table className="w-full text-left table-fixed border-collapse">
-						<thead className="bg-gray-50 dark:bg-neutral-800">
-							{table.getHeaderGroups().map((headerGroup) => (
-								<tr key={headerGroup.id} className="border-b border-gray-200">
-									{headerGroup.headers.map((header) => (
-										<th
-											key={header.id}
-											className="px-6 py-4 text-sm font-semibold text-black dark:text-white"
-										>
-											{flexRender(
-												header.column.columnDef.header,
-												header.getContext(),
-											)}
-										</th>
-									))}
-								</tr>
-							))}
-						</thead>
-						<tbody className="divide-y divide-gray-100">
-							{table.getRowModel().rows.map((row) => (
-								<tr
-									key={row.id}
-									className="dark:hover:bg-neutral-700 hover:bg-neutral-200 transition-colors duration-200"
-								>
-									{row.getVisibleCells().map((cell) => (
-										<td
-											key={cell.id}
-											className="px-6 py-4 text-sm text-gray-700"
-										>
-											{flexRender(
-												cell.column.columnDef.cell,
-												cell.getContext(),
-											)}
-										</td>
-									))}
-								</tr>
-							))}
-						</tbody>
-					</table>
+		<div>
+			<div className="max-w-6xl mx-auto hidden md:block">
+				<div className="overflow-hidden bg-white dark:bg-neutral-800 rounded-xl border border-dark mt-6">
+					<div className="overflow-x-auto max-h-98">
+						<table className="w-full text-left table-fixed border-collapse">
+							<thead className="bg-gray-50 dark:bg-neutral-800">
+								{table.getHeaderGroups().map((headerGroup) => (
+									<tr key={headerGroup.id} className="border-b border-gray-200">
+										{headerGroup.headers.map((header) => (
+											<th
+												key={header.id}
+												className="px-6 py-4 text-sm font-semibold text-black dark:text-white"
+											>
+												{flexRender(
+													header.column.columnDef.header,
+													header.getContext(),
+												)}
+											</th>
+										))}
+									</tr>
+								))}
+							</thead>
+							<tbody className="divide-y divide-gray-100">
+								{table.getRowModel().rows.map((row) => (
+									<tr key={row.id} className={setTodoStatus(row.original)}>
+										{row.getVisibleCells().map((cell) => (
+											<td key={cell.id} className="px-6 py-4 text-gray-700">
+												{flexRender(
+													cell.column.columnDef.cell,
+													cell.getContext(),
+												)}
+											</td>
+										))}
+									</tr>
+								))}
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div className="md:hidden">
+				<div>
+					<span></span>
+					<span></span>
+					<span></span>
+					<span></span>
 				</div>
 			</div>
 		</div>
