@@ -47,10 +47,12 @@ export default function AddTodo({
 			setStatus(false);
 		}
 	}
+	let [newCategoryModalClass, setNewCategoryModalClass] = useState("hidden");
 	function HandleCloseModal(event) {
 		if (
 			event.target.className ===
-			"w-dvw h-dvh flex mr-16 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all"
+				"w-dvw h-dvh flex mr-16 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all" &&
+			newCategoryModalClass === "hidden"
 		) {
 			setModalStatus(
 				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
@@ -99,6 +101,8 @@ export default function AddTodo({
 					removeValue={removeValue}
 					selectedCategory={selectedCategory}
 					setSelectedCategory={setSelectedCategory}
+					newCategoryModalClass={newCategoryModalClass}
+					setNewCategoryModalClass={setNewCategoryModalClass}
 				/>
 			</div>
 		</div>

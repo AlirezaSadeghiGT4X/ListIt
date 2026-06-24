@@ -2,20 +2,39 @@ import { useReducer, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 import { v4 as uuidv4 } from "uuid";
 
-export default function AddTodoModal({ CloseModal }) {
+export default function AddTodoModal({
+	CloseModal,
+	newCategoryModalClass,
+	setNewCategoryModalClass,
+}) {
 	const [, forceUpdate] = useReducer((x) => x + 1, 0);
 	let [categories, setCategories] = useLocalStorage("categories", ["All"]);
 	let [selectedCategory, setSelectedCategory] = useState("NoCategory");
 	let [inputValue, setInputValue] = useState("");
 	let [textareaValue, setTextareaValue] = useState("");
+	let [newCategoryInput, setNewCategoryInput] = useState("");
+	let [unicCategoryClass, setUnicCategoryClass] = useState("hidden");
 	function AddCategoryClickHandler() {
-		let newCategory = prompt("Enter your new category name : ");
+		let newCategory = newCategoryInput;
+		let isUnic = true;
+		categories.map((category) => {
+			if (newCategory == category) {
+				isUnic = false;
+			}
+		});
 		if (newCategory) {
-			let newCategories = [...categories, newCategory.trim()];
-			setCategories(newCategories);
-			forceUpdate();
-			Categories();
-			setSelectedCategory(newCategory);
+			if (isUnic) {
+				let newCategories = [...categories, newCategory.trim()];
+				setCategories(newCategories);
+				forceUpdate();
+				Categories();
+				setSelectedCategory(newCategory);
+				ResetNewCategoryModal();
+			} else {
+				setUnicCategoryClass("text-xs text-red-600 ml-2");
+			}
+		} else {
+			setSelectedCategory("NoCategory");
 		}
 	}
 	//Render Categories in select
@@ -41,11 +60,17 @@ export default function AddTodoModal({ CloseModal }) {
 	function TextareaChangeHandler() {
 		setTextareaValue(event.target.value);
 	}
+	function changeNewCategoryInputHandler(event) {
+		setNewCategoryInput(event.target.value);
+	}
 	function ResetModal() {
 		setInputValue("");
 		setRequireField("text-xs text-red-600 ml-2 hidden");
 		setSelectedCategory("NoCategory");
 		setTextareaValue("");
+		setNewCategoryModalClass("hidden");
+		setNewCategoryInput("");
+		setUnicCategoryClass("hidden");
 		CloseModal();
 	}
 	//Add new Todo
@@ -103,6 +128,18 @@ export default function AddTodoModal({ CloseModal }) {
 			setRequireField("text-xs text-red-600 ml-2 block");
 		}
 	}
+	//Open add new category modal
+	function openNewCategoryModal() {
+		setNewCategoryModalClass(
+			"absolute w-full h-full top-0 flex items-center justify-center backdrop-blur-xs rounded-lg",
+		);
+	}
+	function ResetNewCategoryModal() {
+		AddCategoryClickHandler();
+		setNewCategoryModalClass("hidden");
+		setUnicCategoryClass("hidden");
+		setNewCategoryInput("");
+	}
 	return (
 		<div className="relative">
 			<div className="w-75 sm:w-85 md:w-120 p-4 h-96 bg-white dark:bg-neutral-950 rounded-lg flex flex-col gap-8 border border-dark dark:border-none shadow-lg shadow-gray-500 dark:shadow-sm dark:shadow-white">
@@ -141,10 +178,10 @@ export default function AddTodoModal({ CloseModal }) {
 								{Categories()}
 								<option
 									name="new"
-									onClick={AddCategoryClickHandler}
+									onClick={openNewCategoryModal}
 									className="text-dark"
 								>
-									<p>+New category</p>
+									+New category
 								</option>
 							</select>
 						</div>
@@ -164,6 +201,64 @@ export default function AddTodoModal({ CloseModal }) {
 				>
 					Add
 				</button>
+			</div>
+			<div className={newCategoryModalClass}>
+				<div className="px-2.5 py-4 bg-white dark:bg-neutral-950 rounded-lg flex flex-col gap-4 border border-dark dark:border-none shadow-lg shadow-gray-500 dark:shadow-sm dark:shadow-white items-center justify-center w-65">
+					<div className="relative w-full flex items-center justify-center">
+						<div
+							className="absolute right-1.5 mb-4 text-rose-800 text-3xl cursor-pointer"
+							onClick={ResetNewCategoryModal}
+						>
+							×
+						</div>
+						<p className="text-sm text-black dark:text-white">
+							ADD NEW CATEGORY
+						</p>
+					</div>
+					<div className="w-full flex justify-between items-center">
+						<div className="flex flex-col w-4/5">
+							<input
+								type="text"
+								name="New category"
+								className="bg-white text-black rounded-lg overflow-hidden px-2 py-0.5 border border-slate-700 h-8"
+								onChange={changeNewCategoryInputHandler}
+								value={newCategoryInput}
+							/>
+							<p className={unicCategoryClass}>
+								You have already this category.
+							</p>
+						</div>
+						<button
+							className="flex items-center justify-center cursor-pointer hover:bg-middle hover:ring-4 ring-offset-0 ring-primary bg-primary text-white transition-all duration-300 rounded-full w-10 h-10"
+							onClick={AddCategoryClickHandler}
+						>
+							<svg
+								width="30px"
+								height="30px"
+								viewBox="0 0 24 24"
+								fill="none"
+								xmlns="http://www.w3.org/2000/svg"
+							>
+								<g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+								<g
+									id="SVGRepo_tracerCarrier"
+									strokeLinecap="round"
+									strokeLinejoin="round"
+								></g>
+								<g id="SVGRepo_iconCarrier">
+									{" "}
+									<path
+										d="M6 12H18M12 6V18"
+										stroke="#ffffff"
+										strokeWidth="2"
+										strokeLinecap="round"
+										strokeLinejoin="round"
+									></path>{" "}
+								</g>
+							</svg>
+						</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	);
