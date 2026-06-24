@@ -17,7 +17,6 @@ export default function Categories({ selectedCategory, setSelectedCategory }) {
 	}, [selectedCategory, setSelectedCategory]);
 	function ClickHandler() {
 		setSelectedCategory(event.target.outerText);
-		console.log(event.target.outerText);
 	}
 	return (
 		<nav className="w-full text-black dark:text-white md:px-6 px-2 items-center flex gap-3 overflow-scroll hide-scrollbar scroll-m-0 py-5">
