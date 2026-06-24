@@ -17,11 +17,11 @@ export default function AddTodoModal({
 	function AddCategoryClickHandler() {
 		let newCategory = newCategoryInput;
 		let isUnic = true;
-		categories.map((category) => {
+		for (const category of categories) {
 			if (newCategory == category) {
 				isUnic = false;
 			}
-		});
+		}
 		if (newCategory) {
 			if (isUnic) {
 				let newCategories = [...categories, newCategory.trim()];
@@ -82,11 +82,11 @@ export default function AddTodoModal({
 	function AddNewTodo() {
 		//Check the todo is unic
 		let isUnic = true;
-		todos.map((todo) => {
+		for (const todo of todos) {
 			if (inputValue == todo.title) {
 				isUnic = false;
 			}
-		});
+		}
 		//Add todo
 		if (inputValue != "" && inputValue != " " && isUnic) {
 			ResetModal();
