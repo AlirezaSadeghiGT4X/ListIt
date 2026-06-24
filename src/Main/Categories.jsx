@@ -21,7 +21,7 @@ export default function Categories({ selectedCategory, setSelectedCategory }) {
 	}
 	return (
 		<nav className="w-full text-black dark:text-white md:px-6 px-2 items-center flex gap-3 overflow-scroll hide-scrollbar scroll-m-0 py-5">
-			<p className="text-lg">Categories : </p>
+			<p className="text-lg text-nowrap">Categories :</p>
 			<div className="flex gap-4">
 				{savedCategories.map((category, index) => {
 					if (category == selectedCategory) {
