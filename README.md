@@ -1,16 +1,47 @@
-# React + Vite
+<div align="center">
+  <img src="/public/Images/ListItLogo.webp" alt="ListIt Logo" width="250"/>
+  
+  <p>A clean, minimal todo list app to manage your daily tasks.</p>
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+[![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black)](https://react.dev)
+[![TailwindCSS](https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com)
+[![Vite](https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev)
+[![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black)](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-4CAF50?style=for-the-badge&logo=vercel&logoColor=white)](https://your-demo-link.com)
 
-Currently, two official plugins are available:
+</div>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## About
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+ListIt is a lightweight task management app built for everyday use. No accounts, no cloud — just your tasks, saved right in your browser.
 
-## Expanding the ESLint configuration
+## Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ✅ Add, complete, and delete tasks
+- 🗂️ Categorize tasks with custom categories
+- 🔍 Filter tasks by category
+- 🌙 Dark mode support
+- 💾 Data saved locally — no account needed
+
+## Tech Stack
+
+| Technology     | Purpose              |
+| -------------- | -------------------- |
+| React.js       | UI & component logic |
+| Tailwind CSS   | Styling              |
+| TanStack Table | Data table rendering |
+| Vite           | Build tool           |
+
+## Data Storage
+
+ListIt stores your tasks in your browser's local storage. No data is sent to any server. Keep in mind that clearing your browser data will permanently delete your tasks.
+
+---
+
+## License
+
+MIT © [GOODBYE Company](.)
+
+See [LICENSE](./LICENSE) for details.
