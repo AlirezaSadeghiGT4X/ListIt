@@ -20,24 +20,19 @@ export default function Todos({ selectedCategory, setSelectedCategory }) {
 		}
 		if (todos.length > 0 && categoryStatus != null) {
 			setStatus(true);
-			console.log("first");
 		} else if (
 			selectedCategory == undefined &&
 			todos != undefined &&
 			status != true
 		) {
 			setStatus(true);
-			console.log("second");
 		} else if (
 			selectedCategory == "All" &&
 			todos != null &&
 			todos != undefined &&
 			todos.length >= 1
 		) {
-			console.log(todos);
-
 			setStatus(true);
-			console.log("third");
 		} else {
 			setStatus(null);
 		}
