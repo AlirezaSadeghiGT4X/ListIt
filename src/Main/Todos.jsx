@@ -38,7 +38,7 @@ export default function Todos({ selectedCategory, setSelectedCategory }) {
 		}
 	}, [categoryStatus, data, selectedCategory, status, todos]);
 	return (
-		<div className="relative w-full">
+		<div className="w-full">
 			{status != true ? (
 				<div className="mb-36">
 					<Empty />

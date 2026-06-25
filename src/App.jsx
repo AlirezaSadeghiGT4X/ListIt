@@ -9,7 +9,7 @@ export default function App() {
 				<Route
 					path="/"
 					element={
-						<div className="flex flex-col h-screen xl:overflow-hidden">
+						<div className="relative flex flex-col h-screen xl:overflow-hidden">
 							<Header />
 							<Main />
 						</div>

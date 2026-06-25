@@ -1,5 +1,5 @@
 import { useState } from "react";
-import AddTodoModal from "./AddTodoModal";
+import TodoModal from "./TodoModal";
 
 export default function AddTodo({
 	data,
@@ -94,7 +94,7 @@ export default function AddTodo({
 				</svg>
 			</button>
 			<div className={modalStatus}>
-				<AddTodoModal
+				<TodoModal
 					CloseModal={ClickHandler}
 					data={data}
 					setValue={setValue}
@@ -103,6 +103,7 @@ export default function AddTodo({
 					setSelectedCategory={setSelectedCategory}
 					newCategoryModalClass={newCategoryModalClass}
 					setNewCategoryModalClass={setNewCategoryModalClass}
+					title={"ADD NEW TODO"}
 				/>
 			</div>
 		</div>
