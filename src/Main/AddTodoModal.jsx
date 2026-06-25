@@ -13,25 +13,25 @@ export default function AddTodoModal({
 	let [inputValue, setInputValue] = useState("");
 	let [textareaValue, setTextareaValue] = useState("");
 	let [newCategoryInput, setNewCategoryInput] = useState("");
-	let [unicCategoryClass, setUnicCategoryClass] = useState("hidden");
+	let [UniqueCategoryClass, setUniqueCategoryClass] = useState("hidden");
 	function AddCategoryClickHandler() {
 		let newCategory = newCategoryInput;
-		let isUnic = true;
+		let isUnique = true;
 		for (const category of categories) {
 			if (newCategory == category) {
-				isUnic = false;
+				isUnique = false;
 			}
 		}
 		if (newCategory) {
-			if (isUnic) {
+			if (isUnique) {
 				let newCategories = [...categories, newCategory.trim()];
 				setCategories(newCategories);
 				forceUpdate();
 				Categories();
 				setSelectedCategory(newCategory);
-				ResetNewCategoryModal();
+				setNewCategoryModalClass("hidden");
 			} else {
-				setUnicCategoryClass("text-xs text-red-600 ml-2");
+				setUniqueCategoryClass("text-xs text-red-600 ml-2");
 			}
 		} else {
 			setSelectedCategory("NoCategory");
@@ -70,7 +70,7 @@ export default function AddTodoModal({
 		setTextareaValue("");
 		setNewCategoryModalClass("hidden");
 		setNewCategoryInput("");
-		setUnicCategoryClass("hidden");
+		setUniqueCategoryClass("hidden");
 		CloseModal();
 	}
 	//Add new Todo
@@ -80,16 +80,15 @@ export default function AddTodoModal({
 	let [errorText, setErrorText] = useState("");
 	let [todos, setTodos] = useLocalStorage("todos", []);
 	function AddNewTodo() {
-		//Check the todo is unic
-		let isUnic = true;
+		//Check the todo is Unique
+		let isUnique = true;
 		for (const todo of todos) {
 			if (inputValue == todo.title) {
-				isUnic = false;
+				isUnique = false;
 			}
 		}
 		//Add todo
-		if (inputValue != "" && inputValue != " " && isUnic) {
-			ResetModal();
+		if (inputValue != "" && inputValue != " " && isUnique) {
 			let time = new Date();
 			const newTodo = {
 				id: uuidv4(),
@@ -110,19 +109,20 @@ export default function AddTodoModal({
 					time.getSeconds(),
 				checked: false,
 			};
+			ResetModal();
 			if (todos) {
 				setTodos([...todos, newTodo]);
 			} else {
 				setTodos([newTodo]);
 			}
 		} else {
-			if ((inputValue == "" || inputValue == " ") && !isUnic) {
+			if ((inputValue == "" || inputValue == " ") && !isUnique) {
 				setErrorText(
 					"This field is required and you have already the same todo.",
 				);
 			} else if (inputValue == "" || inputValue == " ") {
 				setErrorText("This field is required.");
-			} else if (!isUnic) {
+			} else if (!isUnique) {
 				setErrorText("You have already the same todo.");
 			}
 			setRequireField("text-xs text-red-600 ml-2 block");
@@ -137,7 +137,7 @@ export default function AddTodoModal({
 	function ResetNewCategoryModal() {
 		AddCategoryClickHandler();
 		setNewCategoryModalClass("hidden");
-		setUnicCategoryClass("hidden");
+		setUniqueCategoryClass("hidden");
 		setNewCategoryInput("");
 	}
 	return (
@@ -224,7 +224,7 @@ export default function AddTodoModal({
 								onChange={changeNewCategoryInputHandler}
 								value={newCategoryInput}
 							/>
-							<p className={unicCategoryClass}>
+							<p className={UniqueCategoryClass}>
 								You have already this category.
 							</p>
 						</div>
