@@ -21,27 +21,27 @@ export default function AddTodo({
 	}
 	//Handle button click
 	let [modalStatus, setModalStatus] = useState(
-		"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+		"w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
 	);
 	let [status, setStatus] = useState(false);
 	function ClickHandler() {
 		if (status == false) {
 			setModalStatus(
-				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
+				"w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
 			);
 			setTimeout(() => {
 				setModalStatus(
-					"w-dvw h-dvh flex mr-16 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all",
+					"w-dvw h-dvh flex inset-0 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all",
 				);
 			}, 1);
 			setStatus(true);
 		} else if (status == true) {
 			setModalStatus(
-				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
+				"w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
 			);
 			setTimeout(() => {
 				setModalStatus(
-					"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+					"w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
 				);
 			}, 1);
 			setStatus(false);
@@ -51,15 +51,15 @@ export default function AddTodo({
 	function HandleCloseModal(event) {
 		if (
 			event.target.className ===
-				"w-dvw h-dvh flex mr-16 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all" &&
+				"w-dvw h-dvh flex inset-0 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all" &&
 			newCategoryModalClass === "hidden"
 		) {
 			setModalStatus(
-				"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
+				"w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
 			);
 			setTimeout(() => {
 				setModalStatus(
-					"w-dvw h-dvh flex mr-16 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+					"w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
 				);
 			}, 50);
 			setStatus(false);
