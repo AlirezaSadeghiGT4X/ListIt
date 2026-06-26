@@ -222,7 +222,7 @@ export default function AddTodoModal({
 				<p className="w-full text-center text-xl xl:text-2xl text-black dark:text-white font-light">
 					{title}
 				</p>
-				<form className="space-y-3">
+				<form onSubmit={(e) => e.preventDefault()} className="space-y-3">
 					<div className="flex gap-2">
 						<div className="flex flex-col text-black dark:text-white w-full">
 							<p className="ml-1">Title</p>
