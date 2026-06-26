@@ -14,6 +14,7 @@ export default function AddTodoModal({
 }) {
 	const [, forceUpdate] = useReducer((x) => x + 1, 0);
 	let [categories, setCategories] = useLocalStorage("categories", ["All"]);
+	let [, setUserSelectedCategory] = useLocalStorage("selectedCategory");
 	let [selectedCategory, setSelectedCategory] = useState("NoCategory");
 	let [inputValue, setInputValue] = useState("");
 	let [newCategoryInput, setNewCategoryInput] = useState("");
@@ -132,6 +133,7 @@ export default function AddTodoModal({
 					checked: false,
 				};
 				ResetModal();
+				setUserSelectedCategory(newTodo.category);
 				if (todos) {
 					setTodos([...todos, newTodo]);
 				} else {
@@ -176,7 +178,7 @@ export default function AddTodoModal({
 						time.getSeconds(),
 					checked: false,
 				};
-				ResetModal();
+				ResetModal(newTodo.category);
 				let updatedTodos = todos.map((todo) => {
 					if (todo.title == previousTilte) {
 						return newTodo;
