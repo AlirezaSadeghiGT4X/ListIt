@@ -178,7 +178,8 @@ export default function AddTodoModal({
 						time.getSeconds(),
 					checked: false,
 				};
-				ResetModal(newTodo.category);
+				ResetModal();
+				setUserSelectedCategory(newTodo.category);
 				let updatedTodos = todos.map((todo) => {
 					if (todo.title == previousTilte) {
 						return newTodo;
