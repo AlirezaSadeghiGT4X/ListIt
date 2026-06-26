@@ -51,27 +51,27 @@ export default function TodoList({ data, setValue, removeValue }) {
 	}
 	//Edit todo
 	let [modalStatus, setModalStatus] = useState(
-		"z-50 top-0 left-0 absolute w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+		"z-50 top-0 left-0 fixed w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
 	);
 	let [status, setStatus] = useState(false);
 	function ClickHandler() {
 		if (status == false) {
 			setModalStatus(
-				"z-50 top-0 left-0 absolute w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
+				"z-50 top-0 left-0 fixed w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
 			);
 			setTimeout(() => {
 				setModalStatus(
-					"z-50 absolute w-dvw h-dvh flex inset-0 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all",
+					"z-50 fixed w-dvw h-dvh flex inset-0 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all",
 				);
 			}, 1);
 			setStatus(true);
 		} else if (status == true) {
 			setModalStatus(
-				"z-50 top-0 left-0 absolute w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
+				"z-50 top-0 left-0 fixed w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
 			);
 			setTimeout(() => {
 				setModalStatus(
-					"z-50 top-0 left-0 absolute w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+					"z-50 top-0 left-0 fixed w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
 				);
 			}, 1);
 			setStatus(false);
@@ -81,15 +81,15 @@ export default function TodoList({ data, setValue, removeValue }) {
 	function HandleCloseModal(event) {
 		if (
 			event.target.className ===
-				"z-50 top-0 left-0 absolute w-dvw h-dvh flex inset-0 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all" &&
+				"z-50 top-0 left-0 fixed w-dvw h-dvh flex inset-0 items-center justify-center backdrop-blur-xs pointer-events-auto opcaity-100 scale-100 transition-all" &&
 			newCategoryModalClass === "hidden"
 		) {
 			setModalStatus(
-				"z-50 top-0 left-0 absolute w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
+				"z-50 top-0 left-0 fixed w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all",
 			);
 			setTimeout(() => {
 				setModalStatus(
-					"z-50 top-0 left-0 absolute w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
+					"z-50 top-0 left-0 fixed w-dvw h-dvh flex inset-0 items-center justify-center pointer-events-none opacity-0 scale-90 backdrop-blur-xs transition-all hidden",
 				);
 			}, 50);
 			setStatus(false);
@@ -251,7 +251,7 @@ export default function TodoList({ data, setValue, removeValue }) {
 				<div className="overflow-hidden bg-white dark:bg-neutral-800 rounded-xl border border-dark mt-6">
 					<div className="overflow-x-auto max-h-98">
 						<table className="w-full text-left table-fixed border-collapse">
-							<thead className="bg-gray-50 dark:bg-neutral-800">
+							<thead className="bg-gray-50 dark:bg-neutral-800 sticky top-0 z-10 border-b-2 border-white">
 								{table.getHeaderGroups().map((headerGroup) => (
 									<tr key={headerGroup.id} className="border-b border-gray-200">
 										{headerGroup.headers.map((header) => (

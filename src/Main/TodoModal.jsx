@@ -212,7 +212,7 @@ export default function AddTodoModal({
 	}
 	return (
 		<div className="relative">
-			<div className="w-75 sm:w-85 md:w-120 p-4 h-96 bg-white dark:bg-neutral-950 rounded-lg flex flex-col gap-8 border border-dark dark:border-none shadow-lg shadow-gray-500 dark:shadow-sm dark:shadow-white">
+			<div className="z-50 w-75 sm:w-85 md:w-120 p-4 h-96 bg-white dark:bg-neutral-950 rounded-lg flex flex-col gap-8 border border-dark dark:border-none shadow-lg shadow-gray-500 dark:shadow-sm dark:shadow-white">
 				<div
 					className="absolute right-4 top-2 text-rose-800 text-4xl cursor-pointer"
 					onClick={ResetModal}
