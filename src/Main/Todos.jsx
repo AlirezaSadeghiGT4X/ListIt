@@ -40,7 +40,7 @@ export default function Todos({ selectedCategory, setSelectedCategory }) {
 	return (
 		<div className="w-full">
 			{status != true ? (
-				<div className="mb-36">
+				<div>
 					<Empty />
 				</div>
 			) : (
