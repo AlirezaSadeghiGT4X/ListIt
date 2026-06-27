@@ -138,7 +138,11 @@ export default function AddTodoModal({
 					checked: false,
 				};
 				ResetModal();
-				setUserSelectedCategory(newTodo.category);
+				if (newTodo.category != "NoCategory") {
+					setUserSelectedCategory(newTodo.category);
+				} else {
+					setUserSelectedCategory("All");
+				}
 				if (todos) {
 					setTodos([...todos, newTodo]);
 				} else {
