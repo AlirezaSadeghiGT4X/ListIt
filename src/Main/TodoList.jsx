@@ -28,7 +28,15 @@ export default function TodoList({ data, setValue, removeValue }) {
 		}
 	}, [data, selectedCategory]);
 	//Check, change, set todo status
+	const audio = () => {
+		const audio = new Audio("/public/Audios/Checkbox.mp3");
+		audio.volume = 1;
+		audio.play();
+	};
 	function CheckboxClickHandler(event) {
+		if (event.target.checked == true) {
+			audio();
+		}
 		const updatedData = data.map((aData) => {
 			if (event.target.id === aData.title) {
 				return { ...aData, checked: !aData.checked };
@@ -36,14 +44,15 @@ export default function TodoList({ data, setValue, removeValue }) {
 			return aData;
 		});
 		setValue(updatedData);
-		setTodoStatus();
+		setTodoStatus(event);
 	}
 	//Set trough-line or no for todos
 	function setTodoStatus(todo) {
 		if (!todo.checked) {
 			return "dark:hover:bg-neutral-700 hover:bg-neutral-200 transition-colors duration-200";
+		} else {
+			return "dark:hover:bg-neutral-700 hover:bg-neutral-200 transition-colors duration-200 line-through decoration-2 decoration-amber-300";
 		}
-		return "dark:hover:bg-neutral-700 hover:bg-neutral-200 transition-colors duration-200 line-through decoration-2 decoration-amber-300";
 	}
 	//Delete todo
 	function DeleteTodo(event) {
