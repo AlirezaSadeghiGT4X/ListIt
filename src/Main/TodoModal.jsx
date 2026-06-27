@@ -72,6 +72,11 @@ export default function AddTodoModal({
 	}
 	//Reset Modal for reuse
 	function SelectChangeHandler() {
+		if (event.target.value == "+NewCategory") {
+			setNewCategoryModalClass(
+				"absolute w-full h-full top-0 flex items-center justify-center backdrop-blur-xs rounded-lg",
+			);
+		}
 		setSelectedCategory(event.target.value);
 	}
 	function InputChangeHandler() {
@@ -253,6 +258,7 @@ export default function AddTodoModal({
 									name="new"
 									onClick={openNewCategoryModal}
 									className="text-dark"
+									value={"+NewCategory"}
 								>
 									+New category
 								</option>
