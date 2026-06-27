@@ -237,7 +237,7 @@ export default function AddTodoModal({
 							<input
 								type="text"
 								name="Title"
-								className="bg-white text-black w-full rounded-xl px-2 py-0.5 border border-slate-700"
+								className="bg-white dark:bg-neutral-900 text-black dark:text-gray-200 w-full rounded-xl px-2 py-0.5 border border-slate-700"
 								value={inputValue}
 								onChange={InputChangeHandler}
 								required
@@ -248,7 +248,7 @@ export default function AddTodoModal({
 							<p>Category</p>
 							<select
 								name="Category"
-								className="bg-white text-black px-2 py-1 rounded-lg w-36 text-sm border border-slate-700"
+								className="bg-white dark:bg-neutral-900 text-black dark:text-gray-200 px-2 py-1 rounded-lg w-36 text-sm border border-slate-700"
 								value={selectedCategory}
 								onChange={SelectChangeHandler}
 							>
@@ -270,7 +270,7 @@ export default function AddTodoModal({
 						<textarea
 							value={textareaValue}
 							onChange={TextareaChangeHandler}
-							className="bg-white text-black w-full rounded-lg px-2 py-0.5 resize-none h-26 border border-slate-700"
+							className="bg-white dark:bg-neutral-900 text-black dark:text-gray-200 w-full rounded-lg px-2 py-0.5 resize-none h-26 border border-slate-700"
 						/>
 					</div>
 				</form>
@@ -299,7 +299,7 @@ export default function AddTodoModal({
 							<input
 								type="text"
 								name="New category"
-								className="bg-white text-black rounded-lg overflow-hidden px-2 py-0.5 border border-slate-700 h-8"
+								className="bg-white dark:bg-neutral-900 text-black dark:text-gray-200 rounded-lg overflow-hidden px-2 py-0.5 border border-slate-700 h-8"
 								onChange={changeNewCategoryInputHandler}
 								value={newCategoryInput}
 							/>
