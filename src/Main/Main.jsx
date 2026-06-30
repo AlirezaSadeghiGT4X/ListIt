@@ -8,7 +8,7 @@ export default function Main() {
 		"All",
 	);
 	return (
-		<main className="w-full flex flex-col h-11/12 dark:bg-neutral-900 pt-4 px-6 text-white">
+		<main className="w-full flex flex-col h-full dark:bg-neutral-900 pt-4 px-2 text-white">
 			<Categories
 				selectedCategory={selectedCategory}
 				setSelectedCategory={setSelectedCategory}
