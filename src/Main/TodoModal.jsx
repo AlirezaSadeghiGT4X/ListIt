@@ -289,12 +289,12 @@ export default function AddTodoModal({
 				<div className="px-2.5 py-4 bg-white dark:bg-neutral-950 rounded-lg flex flex-col gap-4 border border-dark dark:border-none shadow-lg shadow-gray-500 dark:shadow-sm dark:shadow-white items-center justify-center w-65">
 					<div className="relative w-full flex items-center justify-center">
 						<div
-							className="absolute right-1.5 mb-4 text-rose-800 text-3xl cursor-pointer"
+							className="absolute right-2 mb-2.5 text-rose-800 text-3xl cursor-pointer"
 							onClick={ResetNewCategoryModal}
 						>
 							×
 						</div>
-						<p className="text-sm text-black dark:text-white">
+						<p className="text-sm text-black dark:text-white mr-2">
 							ADD NEW CATEGORY
 						</p>
 					</div>
