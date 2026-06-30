@@ -27,7 +27,7 @@ export default function Categories({ selectedCategory, setSelectedCategory }) {
 						return (
 							<span
 								key={index}
-								className="bg-primary text-white px-3 py-0.5 rounded-2xl cursor-pointer"
+								className="bg-primary text-white px-3 py-0.5 rounded-2xl cursor-pointer w-max"
 								onClick={ClickHandler}
 							>
 								{category}
@@ -37,7 +37,7 @@ export default function Categories({ selectedCategory, setSelectedCategory }) {
 					return (
 						<span
 							key={index}
-							className="dark:bg-black bg-gray-200 dark:text-white text-black px-3 py-0.5 rounded-2xl cursor-pointer"
+							className="dark:bg-black bg-gray-200 dark:text-white text-black px-3 py-0.5 rounded-2xl cursor-pointer w-max"
 							onClick={ClickHandler}
 						>
 							{category}
