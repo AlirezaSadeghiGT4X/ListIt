@@ -35,14 +35,18 @@ export default function AddTodoModal({
 	}, [previousCategory, previousDescription, previousTilte, title]);
 	let [UniqueCategoryClass, setUniqueCategoryClass] = useState("hidden");
 	function AddCategoryClickHandler() {
-		let newCategory = newCategoryInput;
+		let newCategory = newCategoryInput.trim();
 		let isUnique = true;
 		for (const category of categories) {
-			if (newCategory == category) {
+			if (
+				newCategory == category ||
+				newCategory == "All" ||
+				newCategory == "all"
+			) {
 				isUnique = false;
 			}
 		}
-		if (newCategory) {
+		if (newCategory && event.target.id != "closer") {
 			if (isUnique) {
 				let newCategories = [...categories, newCategory.trim()];
 				setCategories(newCategories);
@@ -50,6 +54,7 @@ export default function AddTodoModal({
 				Categories();
 				setSelectedCategory(newCategory);
 				setNewCategoryModalClass("hidden");
+				setNewCategoryInput("");
 			} else {
 				setUniqueCategoryClass("text-xs text-red-600 ml-2");
 			}
@@ -291,6 +296,7 @@ export default function AddTodoModal({
 						<div
 							className="absolute right-2 mb-2.5 text-rose-800 text-3xl cursor-pointer"
 							onClick={ResetNewCategoryModal}
+							id="closer"
 						>
 							×
 						</div>
