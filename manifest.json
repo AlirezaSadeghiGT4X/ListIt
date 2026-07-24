@@ -1,0 +1,17 @@
+{
+  "name": "ListIt",
+  "short_name": "ListIt",
+  "description": "",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#111111",
+  "theme_color": "#17A248",
+  "icons": [
+    {
+      "src": "/public/Images/ListItLogo.webp",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
