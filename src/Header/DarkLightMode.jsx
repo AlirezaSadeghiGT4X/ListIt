@@ -1,7 +1,7 @@
 import { useState } from "react";
 
 export default function DarkLightMode() {
-	let [mode, setMode] = useState(() => {
+	const [mode, setMode] = useState(() => {
 		if (localStorage.getItem("theme") == undefined) {
 			localStorage.setItem("theme", "dark");
 			return "dark";
@@ -26,11 +26,11 @@ export default function DarkLightMode() {
 	}
 	return (
 		<button
-			className="w-12 flex justify-between items-center h-6 bg-neutral-100 dark:bg-neutral-800 rounded-full p-0.5 border border-taupe-500 hover:cursor-pointer"
+			className="w-12 flex justify-between items-center h-6 bg-neutral-100 dark:bg-neutral-700 rounded-full p-0.5 border border-taupe-500 hover:cursor-pointer"
 			onClick={ChangeDarkAndLightMode}
 		>
 			<div
-				className="rounded-full bg-white flex justify-center items-center visible dark:invisible transition"
+				className="rounded-full h-full bg-white flex justify-center items-center visible dark:invisible transition duration-150 ease-out translate-x-0 dark:translate-x-3"
 				onClick={ChangeDarkAndLightMode}
 			>
 				<svg
@@ -59,12 +59,12 @@ export default function DarkLightMode() {
 				</svg>
 			</div>
 			<div
-				className="rounded-full bg-black flex justify-center items-center invisible dark:visible transition"
+				className="rounded-full h-full bg-black flex justify-center items-center invisible dark:visible transition duration-150 ease-out -translate-x-3 dark:translate-x-0 p-0.5"
 				onClick={ChangeDarkAndLightMode}
 			>
 				<svg
-					width="18px"
-					height="18px"
+					width="16px"
+					height="16px"
 					viewBox="0 0 24 24"
 					fill="none"
 					xmlns="http://www.w3.org/2000/svg"
