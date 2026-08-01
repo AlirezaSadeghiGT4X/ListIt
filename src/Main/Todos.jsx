@@ -10,6 +10,7 @@ export default function Todos({ selectedCategory, setSelectedCategory }) {
 	let todos = data;
 	let [status, setStatus] = useState(null);
 	let [categoryStatus, setCategoryStatus] = useState(null);
+	//Set number of todos to show Empty component of TodoList component
 	useEffect(() => {
 		setCategoryStatus(null);
 		for (const todo of todos) {
